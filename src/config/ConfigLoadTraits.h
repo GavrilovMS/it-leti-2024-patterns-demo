@@ -8,5 +8,6 @@ namespace config
 	{
 	public:
 		FULLY_PTRABLE(ConfigLoadTraits)
+		virtual ~ConfigLoadTraits() = default;
 	};
 } // namespace config
