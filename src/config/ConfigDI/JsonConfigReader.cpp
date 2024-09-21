@@ -61,6 +61,11 @@ namespace config
 		{
 			const auto & jLogs = jConfig["logs"].GetObject();
 
+			if (jLogs.HasMember("enable") && jLogs["enable"].IsBool())
+			{
+				pData->m_lLogsEnabled = jLogs["enable"].GetBool();
+			}
+
 			if (jLogs.HasMember("level") && jLogs["level"].IsString())
 			{
 				pData->m_sLogsLevel = jLogs["level"].GetString();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <mutex>
+#include <shared_mutex>
 #include <string>
 
 #include <config/ConfigDI/ConfigData.h>
@@ -24,6 +24,7 @@ namespace config
 		const std::string& Ip() const;
 		const uint32_t& Port() const;
 		
+		const bool LogsEnabled() const;
 		const std::string& LogsLevel() const;
 		const std::string& LogsPath() const;
 		const std::string& LogsPattern() const;
@@ -31,8 +32,8 @@ namespace config
 	private:
 		std::string m_sFilePath { defaults::DEFAULT_CONFIG_FILE_PATH };
 
-		std::mutex m_mtx;
-		ConfigData::u_ptr_t m_pData { std::make_unique<ConfigData>() };
+		mutable std::shared_mutex m_mtx;
+		ConfigData::s_ptr_t m_pData { std::make_unique<ConfigData>() };
 		IFileConfigReader::s_ptr_t m_pReader { std::make_shared<defaults::DEFAULT_CONFIG_READER>(m_sFilePath) };
 	};
 } // namespace config

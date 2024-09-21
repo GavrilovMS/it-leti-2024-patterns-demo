@@ -1,5 +1,4 @@
 #include <config/ConfigDI/ConfigDI.h>
-
 #include <spdlog/spdlog.h>
 
 namespace config
@@ -23,11 +22,11 @@ namespace config
 
 	bool ConfigDI::Update()
 	{
-		auto pNewData = std::make_unique<ConfigData>();
+		auto pNewData = std::make_shared<ConfigData>();
 		if (pNewData->Load(m_pReader))
 		{
-			std::unique_lock<std::mutex>(m_mtx);
-			m_pData = std::move(pNewData);
+			std::unique_lock lk(m_mtx);
+			m_pData = pNewData;
 			return true;
 		}
 		return false;
@@ -35,27 +34,38 @@ namespace config
 
 	const std::string & ConfigDI::Ip() const
 	{
+		std::shared_lock lk(m_mtx);
 		return m_pData->m_sIpAddress;
 	}
 
 	const uint32_t & ConfigDI::Port() const
 	{
+		std::shared_lock lk(m_mtx);
 		return m_pData->m_nPort;
+	}
+
+	const bool ConfigDI::LogsEnabled() const
+	{
+		std::shared_lock lk(m_mtx);
+		return m_pData->m_lLogsEnabled;
 	}
 
 	const std::string & ConfigDI::LogsLevel() const
 	{
+		std::shared_lock lk(m_mtx);
 		return m_pData->m_sLogsLevel;
 	}
 
 	const std::string & ConfigDI::LogsPath() const
 	{
+		std::shared_lock lk(m_mtx);
 		return m_pData->m_sLogsFilePath;
 	}
 
 	const std::string & ConfigDI::LogsPattern() const
 	{
-		m_pData->m_sLogsPattern;
+		std::shared_lock lk(m_mtx);
+		return m_pData->m_sLogsPattern;
 	}
 
 } // namespace config

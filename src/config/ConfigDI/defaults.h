@@ -16,9 +16,10 @@ namespace config
 		static const uint32_t DEFAULT_PORT = 8080;
 
 		// logs
+		static const bool DEFAULT_LOGS_ENABLED = true;
 		static const constexpr char * DEFAULT_LOGS_FILE_PATH = "logs/callcenter.log";
 		static const constexpr char * DEFAULT_LOGS_LEVEL = "info";
-		static const constexpr char * DEFAULT_LOGS_PATTERN = "[%Y-%m-%d %H:%M:%S.%e] [%l] [%!] %v";
+		static const constexpr char * DEFAULT_LOGS_PATTERN = "[%Y-%m-%d %H:%M:%S.%e] [%l] %v";
 
 	} // namespace defaults
 } // namespace config
