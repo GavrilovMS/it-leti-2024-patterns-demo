@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <ostream>
 
 #include <config/ConfigDI/defaults.h>
 #include <config/IFileConfigReader.h>
@@ -27,3 +28,5 @@ namespace config
 		std::string m_sLogsPattern { defaults::DEFAULT_LOGS_PATTERN };
 	};
 } // namespace config
+
+std::ostream& operator<<(std::ostream& os, const config::ConfigData& data);

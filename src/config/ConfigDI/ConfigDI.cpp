@@ -1,4 +1,7 @@
+#include <sstream>
+
 #include <config/ConfigDI/ConfigDI.h>
+
 #include <spdlog/spdlog.h>
 
 namespace config
@@ -18,6 +21,9 @@ namespace config
 		}
 		if (!Update())
 			spdlog::warn("Failed to init config. Use default values.");
+		std::stringstream ssConfig;
+		ssConfig << *m_pData;
+		spdlog::info("Config:\n{}", ssConfig.str());
 	}
 
 	bool ConfigDI::Update()
