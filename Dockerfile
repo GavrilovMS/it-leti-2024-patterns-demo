@@ -16,6 +16,7 @@ FROM ubuntu:22.04
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y build-essential \
     libboost-all-dev \
+    clang-format \
     cmake \
     curl \
     g++ \
