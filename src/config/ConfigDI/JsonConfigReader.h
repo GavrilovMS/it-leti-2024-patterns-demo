@@ -1,3 +1,5 @@
+#pragma once
+
 #include <config/IFileConfigReader.h>
 
 namespace config
