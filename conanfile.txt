@@ -1,0 +1,8 @@
+[requires]
+boost/1.86.0
+spdlog/1.14.1
+rapidjson/cci.20230929
+
+[generators]
+cmake_find_package
+cmake_paths
