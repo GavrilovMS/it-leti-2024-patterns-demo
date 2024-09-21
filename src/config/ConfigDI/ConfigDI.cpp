@@ -2,10 +2,24 @@
 
 namespace config
 {
-	void ConfigDI::Init(IConfigReader::s_ptr_t pReader)
+	void ConfigDI::Init(const std::string & sFilePath, IFileConfigReader::s_ptr_t pReader)
+	{
+		m_sFilePath = sFilePath;
+		if (pReader)
+		{
+			m_pReader = pReader;
+			m_pReader->SetFilePath(m_sFilePath);
+		}
+		Update();
+	}
+
+	void ConfigDI::Init(IFileConfigReader::s_ptr_t pReader)
 	{
 		if (pReader)
+		{
 			m_pReader = pReader;
+			m_pReader->SetFilePath(m_sFilePath);
+		}
 		Update();
 	}
 

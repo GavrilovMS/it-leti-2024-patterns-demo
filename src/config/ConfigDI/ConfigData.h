@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include <config/IConfigReader.h>
+#include <config/IFileConfigReader.h>
 
 namespace config
 {
@@ -12,6 +12,6 @@ namespace config
 	{
 	public:
 		FULLY_PTRABLE(ConfigData)
-		bool Load(IConfigReader::s_ptr_t pReader);
+		bool Load(IFileConfigReader::s_ptr_t pReader);
 	};
 } // namespace config
