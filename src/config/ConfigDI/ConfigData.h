@@ -20,8 +20,8 @@ namespace config
 		uint32_t m_nPort{defaults::DEFAULT_PORT};
 
 		// logs
-		std::string m_sLevel{defaults::DEFAULT_LOGS_LEVEL};
+		std::string m_sLogsLevel{defaults::DEFAULT_LOGS_LEVEL};
 		std::string m_sLogsFilePath{defaults::DEFAULT_LOGS_FILE_PATH};
-		std::string m_sPattern{defaults::DEFAULT_LOGS_PATTERN};
+		std::string m_sLogsPattern{defaults::DEFAULT_LOGS_PATTERN};
 	};
 } // namespace config

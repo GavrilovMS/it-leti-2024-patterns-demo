@@ -19,6 +19,15 @@ namespace config
 
 		bool Update();
 
+	public:
+
+		const std::string& Ip() const;
+		const uint32_t& Port() const;
+		
+		const std::string& LogsLevel() const;
+		const std::string& LogsPath() const;
+		const std::string& LogsPattern() const;
+
 	private:
 		std::string m_sFilePath { defaults::DEFAULT_CONFIG_FILE_PATH };
 
