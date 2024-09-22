@@ -20,9 +20,12 @@ namespace config
 		LogsConfigDI();
 
 	public:
-		const bool LogsEnabled() const;
-		const std::string & LogsLevel() const;
-		const std::string & LogsPath() const;
-		const std::string & LogsPattern() const;
+		const bool Enabled() const;
+		const std::string & GeneralLevel() const;
+		const std::string & GeneralPath() const;
+		const std::string & GeneralPattern() const;
+
+		const LogsConfigData::loginfo_vec_t & Logs() const;
+		const LogsConfigData::loginfo_t & GetInfoByName(const std::string & sName) const;
 	};
 } // namespace config
