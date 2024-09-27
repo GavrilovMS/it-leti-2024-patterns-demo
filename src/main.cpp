@@ -1,13 +1,13 @@
 #include <config/GeneralConfig/GeneralConfigDI.h>
-#include <config/LogsConfig/LogsConfigDI.h>
 
+#include <utils/Logs/LogsManager.h>
 #include <spdlog/spdlog.h>
 
 int main(int, char **)
 {
 	spdlog::info("Starting CallCenter...");
+	utils::LogsManager::Instance().Init();
 	config::GeneralConfigDI::Instance().Init();
-	config::LogsConfigDI::Instance().Init();
 
 	return 0;
 }

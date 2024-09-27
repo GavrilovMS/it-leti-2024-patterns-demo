@@ -1,9 +1,10 @@
 #include <fstream>
+#include <sstream>
 
 #include <config/GeneralConfig/GeneralJsonConfigReader.h>
 #include <config/GeneralConfig/GeneralConfigData.h>
 
-#include <spdlog/spdlog.h>
+#include <utils/Logs/LogsMacro.h>
 
 #include <rapidjson/document.h>
 #include <rapidjson/error/en.h>
@@ -17,20 +18,12 @@ namespace config
 
 	bool GeneralJsonConfigReader::Read(ConfigDataBase & baseData)
 	{
-		GeneralConfigData data;
-		try
-		{
-			data = dynamic_cast<GeneralConfigData &>(baseData);
-		}
-		catch (...)
-		{
-			return false;
-		}
+		GeneralConfigData & data = dynamic_cast<GeneralConfigData &>(baseData);
 
 		std::ifstream file(m_sFilePath);
 		if (!file.is_open())
 		{
-			spdlog::error("Failed to open file: {}", m_sFilePath);
+			CONFIG_ERROR("Failed to open file: {}", m_sFilePath)
 			return false;
 		}
 
@@ -38,13 +31,13 @@ namespace config
 		rapidjson::Document jConfig;
 		if (jConfig.ParseStream(isw).HasParseError())
 		{
-			spdlog::error("Failed to parse file: {}. Error: {}", m_sFilePath, rapidjson::GetParseError_En(jConfig.GetParseError()));
+			CONFIG_ERROR("Failed to parse file: {}. Error: {}", m_sFilePath, rapidjson::GetParseError_En(jConfig.GetParseError()))
 			return false;
 		}
 
 		if (!jConfig.IsObject())
 		{
-			spdlog::error("Config value should be an object type");
+			CONFIG_ERROR("Config value should be an object type")
 			return false;
 		}
 

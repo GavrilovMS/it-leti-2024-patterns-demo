@@ -4,7 +4,7 @@
 #include <memory>
 #include <shared_mutex>
 
-#include <spdlog/spdlog.h>
+#include <utils/Logs/LogsMacro.h>
 
 #include <config/IFileConfigReader.h>
 
@@ -35,10 +35,12 @@ namespace config
 				m_pReader->SetFilePath(m_sFilePath);
 			}
 			if (!Update())
-				spdlog::warn("Failed to init config. Use default values.");
-			std::stringstream ssConfig;
-			ssConfig << *m_pData;
-			spdlog::info("{}:\n{}", Name(), ssConfig.str());
+			{
+				CONFIG_WARN("Failed to init: {}. Use default values.", m_sFilePath)
+			}
+			std::stringstream data;
+			data << *m_pData;
+			CONFIG_INFO("{}:\n{}", m_sFilePath, data.str())
 		}
 
 		bool Update()
